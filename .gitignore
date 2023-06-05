@@ -1,0 +1,10 @@
+# dependencies
+*/node_modules*
+
+# dists\builds
+*/dist
+*/build*
+
+# ide
+*.*lint*
+*.vscode

@@ -4,8 +4,35 @@ services:
     image: postgres
     hostname: 'devops-postgres'
     ports:
-        - "5432:5432"
+      - "5432:5432"
     environment:
       - POSTGRES_DB=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
+
+  backend:
+    build: ./backend
+    ports:
+      - "8000:8000"
+    container_name: backend
+    stdin_open: true
+    tty: true
+    environment:
+      DB_HOST: 'devops-postgres'
+      DB_USER: 'postgres'
+      DB_PASSWORD: 'postgres'
+      DB_DATABASE: 'postgres'
+      DB_TYPE: 'postgres'
+    depends_on:
+      - db
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    container_name: frontend
+    stdin_open: true
+    tty: true
+    environment:
+      REACT_APP_API_BASE: backend
+    depends_on:
+      - backend
