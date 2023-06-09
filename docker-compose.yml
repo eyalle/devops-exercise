@@ -9,7 +9,6 @@ services:
       - POSTGRES_DB=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
-
   backend:
     build: ./backend
     ports:
@@ -32,7 +31,5 @@ services:
     container_name: frontend
     stdin_open: true
     tty: true
-    environment:
-      REACT_APP_API_BASE: backend
     depends_on:
       - backend
